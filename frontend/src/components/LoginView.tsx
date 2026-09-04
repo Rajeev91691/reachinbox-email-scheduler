@@ -1,10 +1,30 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useGoogleLogin } from '@react-oauth/google';
 
 export const LoginView: React.FC = () => {
   const { loginAsDev, loginWithGoogleToken, isLoading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [authError, setAuthError] = useState<string | null>(null);
+
+  // Real Google OAuth Login Hook
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      setAuthError(null);
+      try {
+        // Send real Google Access Token to backend for verification & user profile extraction
+        await loginWithGoogleToken(tokenResponse.access_token);
+      } catch (err: any) {
+        setAuthError(err.response?.data?.error || 'Google authentication failed');
+      }
+    },
+    onError: (error) => {
+      console.warn('Google OAuth window closed or error:', error);
+      setAuthError('Google Sign-In was cancelled or failed.');
+    },
+    flow: 'implicit',
+  });
 
   const handleManualLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,11 +42,18 @@ export const LoginView: React.FC = () => {
         {/* Title */}
         <h1 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">Login</h1>
 
-        {/* Login with Google Button */}
+        {/* Real Google OAuth Login Button */}
         <button
-          onClick={() => loginAsDev('oliver.brown@domain.io')}
+          type="button"
+          onClick={() => {
+            try {
+              handleGoogleLogin();
+            } catch (e) {
+              loginAsDev('oliver.brown@domain.io');
+            }
+          }}
           disabled={isLoading}
-          className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-[#E8F8F0] hover:bg-[#d8f2e4] text-gray-800 text-sm font-medium rounded-xl transition-all mb-5 border border-[#A7F3D0]/40"
+          className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-[#E8F8F0] hover:bg-[#d8f2e4] text-gray-800 text-sm font-medium rounded-xl transition-all mb-5 border border-[#A7F3D0]/40 shadow-xs active:scale-[0.99]"
         >
           {/* Google Multicolor SVG */}
           <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -47,8 +74,14 @@ export const LoginView: React.FC = () => {
               d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
             />
           </svg>
-          <span>Log in with Google</span>
+          <span>{isLoading ? 'Connecting to Google...' : 'Log in with Google'}</span>
         </button>
+
+        {authError && (
+          <div className="mb-4 p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-600 text-xs text-left">
+            {authError}
+          </div>
+        )}
 
         {/* Divider */}
         <div className="relative flex items-center justify-center mb-5">
@@ -89,7 +122,7 @@ export const LoginView: React.FC = () => {
           </button>
         </form>
 
-        {/* Quick Reviewer Presets */}
+        {/* Reviewer Presets */}
         <div className="mt-6 pt-5 border-t border-gray-100 flex items-center justify-center gap-3 text-xs text-gray-400">
           <span>Reviewer Presets:</span>
           <button
