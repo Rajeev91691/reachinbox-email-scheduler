@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-[#0B0F19] text-slate-100;
+    @apply bg-white text-figma-text font-sans antialiased;
   }
 }
 
@@ -14,12 +14,12 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B0F19;
+  background: #F9FAFB;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1F2937;
+  background: #E5E7EB;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #374151;
+  background: #D1D5DB;
 }

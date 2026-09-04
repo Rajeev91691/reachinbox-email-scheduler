@@ -1,4 +1,4 @@
-import { redisClient } from './redis.service';
+import { initRedis } from './redis.service';
 import { prisma } from '../db/prisma';
 import { SlackService } from './slack.service';
 import { config } from '../config/env';
@@ -24,9 +24,10 @@ export class RateLimiterService {
 
     let currentCount = 0;
     try {
-      currentCount = await redisClient.incr(redisKey);
+      const client = await initRedis();
+      currentCount = await client.incr(redisKey);
       if (currentCount === 1) {
-        await redisClient.expire(redisKey, 7200);
+        await client.expire(redisKey, 7200);
       }
     } catch (e) {
       currentCount = 1;
@@ -100,6 +101,7 @@ export class RateLimiterService {
   static async resetRateLimit(senderEmail: string) {
     const hourWindow = this.getHourWindowKey();
     const redisKey = `ratelimit:${senderEmail}:${hourWindow}`;
-    await redisClient.del(redisKey);
+    const client = await initRedis();
+    await client.del(redisKey);
   }
 }

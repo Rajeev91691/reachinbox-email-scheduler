@@ -4,30 +4,27 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        brand: {
-          50: '#eef2ff',
-          100: '#e0e7ff',
-          200: '#c7d2fe',
-          300: '#a5b4fc',
-          400: '#818cf8',
-          500: '#6366f1',
-          600: '#4f46e5',
-          700: '#4338ca',
-          800: '#3730a3',
-          900: '#312e81',
-          950: '#1e1b4b',
-        },
-        dark: {
-          bg: '#0B0F19',
-          card: '#111827',
-          border: '#1F2937',
-          hover: '#1E293B',
-          muted: '#9CA3AF'
+        figma: {
+          green: '#00A34D',
+          'green-hover': '#008c42',
+          'green-light': '#E8F8F0',
+          'green-border': '#A7F3D0',
+          amber: '#FEF3C7',
+          'amber-text': '#D97706',
+          bg: '#FFFFFF',
+          surface: '#F9FAFB',
+          input: '#F3F4F6',
+          border: '#E5E7EB',
+          text: '#111827',
+          muted: '#6B7280',
+          subtle: '#9CA3AF',
         }
+      },
+      fontFamily: {
+        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
       }
     },
   },
