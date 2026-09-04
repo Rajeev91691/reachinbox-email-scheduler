@@ -18,7 +18,11 @@ export const EmailDetailView: React.FC<EmailDetailViewProps> = ({ email, onBack,
       {/* Header - Matching Figma Screen 5 */}
       <div className="px-8 py-5 border-b border-gray-100 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <button onClick={onBack} className="p-1.5 rounded-full hover:bg-gray-100 text-gray-700">
+          <button
+            onClick={onBack}
+            aria-label="Back to list"
+            className="p-1.5 rounded-full hover:bg-gray-100 text-gray-700 transition-colors"
+          >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <h1 className="text-sm font-bold text-gray-900 truncate max-w-xl">
