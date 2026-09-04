@@ -1,0 +1,85 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String             @id @default(uuid())
+  googleId     String?            @unique
+  email        String             @unique
+  name         String
+  avatarUrl    String?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  emails       EmailJob[]
+  slackConfig  SlackIntegration?
+}
+
+model SenderAccount {
+  id           String     @id @default(uuid())
+  email        String     @unique
+  name         String
+  etherealUser String?
+  etherealPass String?
+  etherealHost String?    @default("smtp.ethereal.email")
+  etherealPort Int?       @default(587)
+  isActive     Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model EmailJob {
+  id                 String    @id @default(uuid())
+  userId             String?
+  user               User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  senderEmail        String
+  recipientEmail     String
+  subject            String
+  body               String
+  scheduledAt        DateTime
+  status             String    @default("SCHEDULED")
+  delaySeconds       Int       @default(2)
+  hourlyLimit        Int       @default(200)
+  retryCount         Int       @default(0)
+  maxRetries         Int       @default(3)
+  errorMessage       String?
+  sentAt             DateTime?
+  etherealMessageId  String?
+  etherealPreviewUrl String?
+  jobId              String?   @unique
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@index([status])
+  @@index([scheduledAt])
+  @@index([senderEmail])
+}
+
+model SlackIntegration {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  webhookUrl  String?
+  channelName String?
+  accessToken String?
+  teamName    String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model RateLimitLog {
+  id          String   @id @default(uuid())
+  senderEmail String
+  hourWindow  String
+  emailCount  Int      @default(0)
+  limitHit    Boolean  @default(false)
+  notifiedAt  DateTime?
+  createdAt   DateTime @default(now())
+
+  @@unique([senderEmail, hourWindow])
+}
