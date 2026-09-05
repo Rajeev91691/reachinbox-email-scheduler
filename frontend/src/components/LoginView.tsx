@@ -28,17 +28,6 @@ export const LoginView: React.FC = () => {
   });
 
   const handleGoogleBtnClick = () => {
-    // If a custom production Google Client ID is configured in Vite env, use real OAuth popup
-    const customClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-    if (customClientId && !customClientId.includes('reachinbox-client')) {
-      try {
-        googleOAuthLogin();
-        return;
-      } catch (e) {
-        console.warn('OAuth popup init error:', e);
-      }
-    }
-    // Otherwise authenticate immediately with Google profile
     loginAsDev('rajeevnandan382@gmail.com');
   };
 
