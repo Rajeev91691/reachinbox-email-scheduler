@@ -39,7 +39,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         id: 'usr_' + Math.random().toString(36).substring(7),
         email: email,
         name: email.split('@')[0].replace('.', ' ').replace(/\b\w/g, l => l.toUpperCase()),
-        picture: `https://lh3.googleusercontent.com/a/default-user=s96-c`,
+        avatarUrl: `https://lh3.googleusercontent.com/a/default-user=s96-c`,
       };
       
       setUser(fallbackUser);
