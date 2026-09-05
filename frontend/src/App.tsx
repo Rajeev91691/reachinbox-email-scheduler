@@ -29,16 +29,16 @@ export const App: React.FC = () => {
     setLoading(true);
     try {
       const [statsRes, schedRes, sentRes, slackRes] = await Promise.all([
-        emailApi.getStats(),
-        emailApi.getScheduled(1, 50),
-        emailApi.getSent(1, 50),
-        slackApi.getStatus(),
+        emailApi.getStats().catch(() => ({ scheduled: 0, sent: 0, failed: 0, rateLimited: 0, total: 0 })),
+        emailApi.getScheduled(1, 50).catch(() => ({ items: [], total: 0 })),
+        emailApi.getSent(1, 50).catch(() => ({ items: [], total: 0 })),
+        slackApi.getStatus().catch(() => ({ connected: false })),
       ]);
 
-      setStats(statsRes);
-      setScheduledItems(schedRes.items);
-      setSentItems(sentRes.items);
-      setSlackConnected(slackRes.connected);
+      setStats(statsRes || { scheduled: 0, sent: 0, failed: 0, rateLimited: 0, total: 0 });
+      setScheduledItems(Array.isArray(schedRes?.items) ? schedRes.items : []);
+      setSentItems(Array.isArray(sentRes?.items) ? sentRes.items : []);
+      setSlackConnected(Boolean(slackRes?.connected));
     } catch (err) {
       console.error('Failed to fetch data:', err);
     } finally {

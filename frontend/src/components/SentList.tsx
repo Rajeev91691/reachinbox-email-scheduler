@@ -13,13 +13,15 @@ interface SentListProps {
 }
 
 export const SentList: React.FC<SentListProps> = ({
-  items,
+  items = [],
   loading,
   searchQuery,
   onSearchChange,
   onRefresh,
   onSelectItem,
 }) => {
+  const safeItems = Array.isArray(items) ? items : [];
+
   return (
     <div className="flex-1 flex flex-col h-screen overflow-hidden bg-white font-sans">
       {/* Top Search & Action Bar */}
@@ -48,12 +50,12 @@ export const SentList: React.FC<SentListProps> = ({
 
       {/* Email Feed - Matching Figma Screen 6 */}
       <div className="flex-1 overflow-y-auto divide-y divide-gray-100">
-        {loading && items.length === 0 ? (
+        {loading && safeItems.length === 0 ? (
           <div className="py-20 text-center text-gray-400 text-xs">
             <div className="w-6 h-6 border-2 border-[#00A34D] border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
             <span>Loading sent emails...</span>
           </div>
-        ) : items.length === 0 ? (
+        ) : safeItems.length === 0 ? (
           <div className="py-24 text-center text-gray-400">
             <div className="w-12 h-12 rounded-full bg-[#E8F8F0] text-[#00A34D] flex items-center justify-center mx-auto mb-3">
               <Send className="w-6 h-6" />
@@ -64,7 +66,7 @@ export const SentList: React.FC<SentListProps> = ({
             </p>
           </div>
         ) : (
-          items.map((job) => {
+          safeItems.map((job) => {
             return (
               <div
                 key={job.id}

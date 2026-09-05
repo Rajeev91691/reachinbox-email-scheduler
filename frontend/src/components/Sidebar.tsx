@@ -86,7 +86,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     : 'text-gray-400'
                 }`}
               >
-                {stats.scheduled + stats.rateLimited}
+                {(stats?.scheduled ?? 0) + (stats?.rateLimited ?? 0)}
               </span>
             </button>
 
@@ -110,7 +110,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     : 'text-gray-400'
                 }`}
               >
-                {stats.sent}
+                {stats?.sent ?? 0}
               </span>
             </button>
           </nav>
