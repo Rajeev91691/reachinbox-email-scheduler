@@ -7,3 +7,9 @@ build/
 .DS_Store
 .system_generated/
 *.log
+*.png
+*.py
+test_results/
+figma_crops/
+figma_screens/
+
