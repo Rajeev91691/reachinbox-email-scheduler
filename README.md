@@ -250,10 +250,31 @@ npm run simulate
 
 ---
 
+## 📸 UI & Verification Gallery (1:1 Pixel Match to Figma)
+
+| 1. Google OAuth Login (Figma Screen 1) | 2. Main Dashboard & Sidebar (Figma Screen 6/7) |
+| :---: | :---: |
+| ![Login](test_results/01_login_screen.png) | ![Dashboard](test_results/02_dashboard_homepage.png) |
+
+| 3. Compose Modal (Figma Screen 2/3) | 4. Send Later Popover (Figma Screen 4) |
+| :---: | :---: |
+| ![Compose](test_results/03_compose_screen.png) | ![Send Later](test_results/04_send_later_popover.png) |
+
+| 5. Scheduled Queue (Figma Screen 7) | 6. Dispatched Emails (Figma Screen 6) |
+| :---: | :---: |
+| ![Scheduled](test_results/05_scheduled_list.png) | ![Sent](test_results/06_sent_list.png) |
+
+| 7. Email Detail Thread (Figma Screen 5) | 8. BullMQ Live Dashboard (/admin/queues) |
+| :---: | :---: |
+| ![Thread](test_results/07_email_detail_view.png) | ![Bull-Board](test_results/10_bull_board_dashboard.png) |
+
+---
+
 ## 📬 Submission Details
 
 - **Author**: Damarla Rajeev Nandan
 - **Contact**: `rajeevnandan382@gmail.com` | `+91 9481509488`
-- **GitHub**: [Rajeev91691](https://github.com/Rajeev91691)
-- **Collaborators to Grant Access**: `Mitrajit` and `Yadav036`
-- **Submission Form**: [ClickUp Submission Link](https://forms.clickup.com/9005062261/f/8cbwp3n-8876/6NNNJ92DV93PQTAYST)
+- **GitHub Repository**: [https://github.com/Rajeev91691/reachinbox-email-scheduler](https://github.com/Rajeev91691/reachinbox-email-scheduler)
+- **Invited Reviewers**: `Mitrajit` (`mitrajit2022@gmail.com`) and `Yadav036` (`yadav036@gmail.com`)
+- **Official Submission Form**: [ClickUp Submission Portal](https://forms.clickup.com/9005062261/f/8cbwp3n-8876/6NNNJ92DV93PQTAYST)
+
