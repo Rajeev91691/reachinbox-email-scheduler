@@ -1,12 +1,13 @@
 # 🚀 ReachInbox • Production-Grade Distributed Email Job Scheduler
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-reachbox.vercel.app-00A34D?style=for-the-badge&logo=vercel&logoColor=white)](https://reachbox.vercel.app)
+[![GitHub Repo](https://img.shields.io/badge/GitHub_Repo-Rajeev91691-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Rajeev91691/reachinbox-email-scheduler)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
 [![BullMQ](https://img.shields.io/badge/BullMQ-E10098?style=for-the-badge&logo=redis&logoColor=white)](https://docs.bullmq.io/)
-[![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)](https://redis.io/)
-[![Elasticsearch](https://img.shields.io/badge/Elasticsearch-005571?style=for-the-badge&logo=elasticsearch&logoColor=white)](https://www.elastic.co/)
-[![React](https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+
+> 🌐 **Live Deployed URL**: **[https://reachbox.vercel.app](https://reachbox.vercel.app)**
+> 🔗 **Preview URL**: **[https://reachbox-qsl88ngq6-rajeevnandan382-5340s-projects.vercel.app](https://reachbox-qsl88ngq6-rajeevnandan382-5340s-projects.vercel.app)**
 
 A fault-tolerant, high-throughput email scheduling engine and real-time dashboard built for **ReachInbox.ai (Outbox Labs)**. Designed to reliably schedule, throttle, persist, and dispatch cold email sequences across multiple senders using Redis-backed BullMQ delayed queues, fake Ethereal SMTP transports, Elasticsearch indexing, and Slack rate-limit mitigations.
 
@@ -274,6 +275,7 @@ npm run simulate
 
 - **Author**: Damarla Rajeev Nandan
 - **Contact**: `rajeevnandan382@gmail.com` | `+91 9481509488`
+- **Live Deployed URL**: **[https://reachbox.vercel.app](https://reachbox.vercel.app)**
 - **GitHub Repository**: [https://github.com/Rajeev91691/reachinbox-email-scheduler](https://github.com/Rajeev91691/reachinbox-email-scheduler)
 - **Invited Reviewers**: `Mitrajit` (`mitrajit2022@gmail.com`) and `Yadav036` (`yadav036@gmail.com`)
 - **Official Submission Form**: [ClickUp Submission Portal](https://forms.clickup.com/9005062261/f/8cbwp3n-8876/6NNNJ92DV93PQTAYST)
