@@ -226,11 +226,7 @@ export const ComposeView: React.FC<ComposeViewProps> = ({ onBack, onScheduled })
                 </button>
                 <button
                   type="button"
-                  onClick={() => {
-                    setShowSendLater(false);
-                    handleSendOrSchedule();
-                  }}
-                  disabled={isSubmitting}
+                  onClick={() => setShowSendLater(false)}
                   className="px-4 py-1.5 rounded-full border border-[#00A34D] text-[#00A34D] hover:bg-[#E8F8F0] text-xs font-semibold"
                 >
                   Done
