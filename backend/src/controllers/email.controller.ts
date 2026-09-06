@@ -103,7 +103,7 @@ export class EmailController {
       const [items, total] = await Promise.all([
         prisma.emailJob.findMany({
           where: { status: filterStatus as any },
-          orderBy: { scheduledAt: 'asc' },
+          orderBy: { createdAt: 'desc' },
           skip,
           take,
         }),
