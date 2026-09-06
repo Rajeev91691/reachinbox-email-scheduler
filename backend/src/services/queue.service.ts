@@ -51,6 +51,18 @@ export class QueueService {
     const delaySeconds = data.delaySeconds ?? 2;
     const hourlyLimit = data.hourlyLimit ?? 200;
 
+    let validUserId: string | null = null;
+    if (data.userId) {
+      try {
+        const user = await prisma.user.findUnique({ where: { id: data.userId } });
+        if (user) {
+          validUserId = user.id;
+        }
+      } catch (e) {
+        validUserId = null;
+      }
+    }
+
     const emailJob = await prisma.emailJob.create({
       data: {
         senderEmail: data.senderEmail,
@@ -60,7 +72,7 @@ export class QueueService {
         scheduledAt: data.scheduledAt,
         delaySeconds,
         hourlyLimit,
-        userId: data.userId,
+        userId: validUserId,
         status: 'SCHEDULED',
       }
     });
