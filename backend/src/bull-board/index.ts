@@ -4,16 +4,23 @@ import { ExpressAdapter } from '@bull-board/express';
 import { getEmailQueue } from '../services/queue.service';
 import { Router } from 'express';
 
-export function setupBullBoard(): Router {
-  const serverAdapter = new ExpressAdapter();
-  serverAdapter.setBasePath('/admin/queues');
+export const serverAdapter = new ExpressAdapter();
+serverAdapter.setBasePath('/admin/queues');
 
-  getEmailQueue().then((queue) => {
-    createBullBoard({
-      queues: [new BullMQAdapter(queue as any) as any],
-      serverAdapter: serverAdapter,
-    });
+let boardInitialized = false;
+
+export async function initBullBoard() {
+  if (boardInitialized) return;
+  const queue = await getEmailQueue();
+  createBullBoard({
+    queues: [new BullMQAdapter(queue as any) as any],
+    serverAdapter: serverAdapter,
   });
+  boardInitialized = true;
+}
 
+export function setupBullBoard(): Router {
+  initBullBoard().catch(console.error);
   return serverAdapter.getRouter();
 }
+

@@ -4,6 +4,7 @@ import { connectDB } from './db/prisma';
 import { initRedis } from './services/redis.service';
 import { WorkerService } from './services/worker.service';
 import { QueueService } from './services/queue.service';
+import { initBullBoard } from './bull-board';
 
 async function bootstrap() {
   console.log('──────────────────────────────────────────────────────────');
@@ -12,6 +13,7 @@ async function bootstrap() {
 
   await connectDB();
   await initRedis();
+  await initBullBoard();
   await WorkerService.startWorker();
   await QueueService.recoverJobsOnRestart();
 
