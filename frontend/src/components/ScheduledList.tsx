@@ -67,8 +67,10 @@ export const ScheduledList: React.FC<ScheduledListProps> = ({
           </div>
         ) : (
           safeItems.map((job) => {
-            const scheduledDate = new Date(job.scheduledAt);
-            const formattedTime = format(scheduledDate, 'EEE h:mm:ss a');
+            const scheduledDate = job.scheduledAt ? new Date(job.scheduledAt) : new Date();
+            const formattedTime = !isNaN(scheduledDate.getTime())
+              ? format(scheduledDate, 'EEE h:mm:ss a')
+              : 'Scheduled';
 
             return (
               <div
@@ -79,7 +81,7 @@ export const ScheduledList: React.FC<ScheduledListProps> = ({
                 {/* Left metadata */}
                 <div className="flex items-center gap-4 min-w-[200px] shrink-0">
                   <span className="text-xs font-semibold text-gray-900 truncate">
-                    To: {job.recipientEmail.split('@')[0]}
+                    To: {(job.recipientEmail || 'lead').split('@')[0]}
                   </span>
                 </div>
 
@@ -93,9 +95,9 @@ export const ScheduledList: React.FC<ScheduledListProps> = ({
 
                 {/* Subject & Preview */}
                 <div className="flex-1 truncate text-xs">
-                  <span className="font-semibold text-gray-800">{job.subject}</span>
+                  <span className="font-semibold text-gray-800">{job.subject || '(No Subject)'}</span>
                   <span className="text-gray-400 font-normal ml-2 truncate">
-                    - {job.body.replace(/\n/g, ' ')}
+                    - {(job.body || '').replace(/\n/g, ' ')}
                   </span>
                 </div>
 
