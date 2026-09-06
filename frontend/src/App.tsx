@@ -30,8 +30,8 @@ export const App: React.FC = () => {
     try {
       const [statsRes, schedRes, sentRes, slackRes] = await Promise.all([
         emailApi.getStats().catch(() => ({ scheduled: 0, sent: 0, failed: 0, rateLimited: 0, total: 0 })),
-        emailApi.getScheduled(1, 50).catch(() => ({ items: [], total: 0 })),
-        emailApi.getSent(1, 50).catch(() => ({ items: [], total: 0 })),
+        emailApi.getScheduled(1, 100).catch(() => ({ items: [], total: 0 })),
+        emailApi.getSent(1, 100).catch(() => ({ items: [], total: 0 })),
         slackApi.getStatus().catch(() => ({ connected: false })),
       ]);
 
