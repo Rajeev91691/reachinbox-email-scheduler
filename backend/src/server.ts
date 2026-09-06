@@ -17,7 +17,7 @@ async function bootstrap() {
   await WorkerService.startWorker();
   await QueueService.recoverJobsOnRestart();
 
-  app.listen(config.port, () => {
+  app.listen(config.port, '0.0.0.0', () => {
     console.log(`🌐 Server running on: http://localhost:${config.port}`);
     console.log(`📊 BullMQ Live Dashboard: http://localhost:${config.port}/admin/queues`);
     console.log(`🔍 Elasticsearch Search: http://localhost:${config.port}/api/search`);
